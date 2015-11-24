@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('LoginCtrl', function($scope, $state, $ionicPopup) {
+app.controller('LoginCtrl', function($scope, $state, $ionicPopup, Auth) {
   $scope.emailLogin = function () {
     console.log('button was clicked on login');
     $scope.user = {};
@@ -16,7 +16,11 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup) {
           type: 'button-energized',
           onTap: function(user) {
             user = $scope.user;
-            //Log the user in
+            Auth.login(user).then(function(){
+              $state.go('tab.dash');
+            }, function(err) {
+              console.log('Error...', err);
+            });
           }
         },
         {
@@ -25,7 +29,12 @@ app.controller('LoginCtrl', function($scope, $state, $ionicPopup) {
           onTap: function(user) {
             user = $scope.user;
             //register the user
-
+            Auth.register(user).then(function(){
+              console.log('user was registered successfully');
+              $state.go('tab.dash');
+            }, function(err) {
+              console.log('Error...', err);
+            });
           }
         }
       ]
