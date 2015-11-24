@@ -18,7 +18,7 @@ angular.module('starter.controllers', [])
     $scope.image ="http://www.maniacworld.com/images/Tiny-Shark-Socks.jpg";
     $scope.button = function(product){
       console.log('button was clicked', product, $scope.image);
-      Products.saveProduct(product, $scope.image)
+      Products.saveProduct(product, $scope.image);
     }
 })
 
